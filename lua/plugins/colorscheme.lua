@@ -2,10 +2,11 @@
 -- UI chrome it leaves light (floats, statusline, tabline), typographic syntax
 -- distinctions, and colored git add/change/delete markers.
 local c = {
-  bg = "#000000",
-  bg1 = "#121212",
-  bg2 = "#1c1c1c",
-  bg3 = "#303030",
+  -- grays step up together so floats/statusline/inlay chips keep their contrast over bg
+  bg = "#121212",
+  bg1 = "#1c1c1c",
+  bg2 = "#262626",
+  bg3 = "#3a3a3a",
   gray = "#707070",
   fg = "#dadada",
   white = "#ffffff",
