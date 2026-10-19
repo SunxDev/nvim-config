@@ -10,9 +10,16 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       diagnostics = {
-        -- Other lines: short inline text. Cursor line: full list in a popup once the
-        -- cursor rests there (lua/config/diagnostic_float.lua), or <leader>cd.
-        virtual_text = { current_line = false },
+        -- Inline: only the first line of the message, no source, so it stays short.
+        -- Full list on demand: gl / <leader>cd, or ]d [d ]e [e ]w [w to jump
+        -- (lua/config/diagnostic_float.lua, lua/config/keymaps.lua).
+        virtual_text = {
+          spacing = 2,
+          source = false,
+          format = function(diagnostic)
+            return diagnostic.message:match("^[^\n]*")
+          end,
+        },
         virtual_lines = false,
         float = {
           border = "rounded",

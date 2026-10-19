@@ -90,3 +90,25 @@ vim.keymap.set("n", "<esc>", function()
   vim.cmd("noh")
   LazyVim.cmp.actions.snippet_stop()
 end, { desc = "Close Hover or Diagnostics Popup / Escape and Clear hlsearch" })
+
+-- Diagnostics popup on demand (no auto popup: it was noisy while moving around).
+local diagnostic_popup = require("config.diagnostic_float")
+vim.keymap.set("n", "gl", diagnostic_popup.open, { desc = "Line Diagnostics" })
+vim.keymap.set("n", "<leader>cd", diagnostic_popup.open, { desc = "Line Diagnostics" })
+
+-- Same jumps as LazyVim's, but showing our window-pinned popup at the target.
+for keys, jump in pairs({
+  ["]d"] = { count = 1 },
+  ["[d"] = { count = -1 },
+  ["]e"] = { count = 1, severity = vim.diagnostic.severity.ERROR },
+  ["[e"] = { count = -1, severity = vim.diagnostic.severity.ERROR },
+  ["]w"] = { count = 1, severity = vim.diagnostic.severity.WARN },
+  ["[w"] = { count = -1, severity = vim.diagnostic.severity.WARN },
+}) do
+  vim.keymap.set("n", keys, function()
+    if vim.diagnostic.jump(jump) then
+      -- after the jump's CursorMoved, which would close a popup opened right away
+      vim.schedule(diagnostic_popup.open)
+    end
+  end, { desc = "Jump to Diagnostic" })
+end
