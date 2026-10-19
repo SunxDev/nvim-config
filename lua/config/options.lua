@@ -9,3 +9,7 @@ vim.o.background = "dark"
 vim.o.wrap = true
 vim.o.linebreak = true -- break at word boundaries, not mid-word
 vim.o.breakindent = true -- wrapped lines keep the line's indentation
+
+-- Mouse off (LazyVim defaults to "a"): clicks/scroll no longer move the cursor;
+-- selecting/copying with the mouse is handled by the terminal instead.
+vim.o.mouse = ""
