@@ -55,9 +55,13 @@ local function apply()
   hl("Statement", { fg = c.white, bold = true }) -- Keyword, Conditional, Repeat, @keyword link here
   hl("Function", { fg = c.func })
   hl("Type", { fg = c.code, italic = true })
+  -- quiet links builtin types (u32, bool, str) to Special, which is upright; keep its color, add italic
+  hl("@type.builtin", { fg = c.fg, italic = true })
   hl("String", { fg = c.string })
   hl("Constant", { fg = c.code, bold = true }) -- numbers, booleans, nil
   hl("@variable.builtin", { fg = c.code, italic = true }) -- self, this
+  -- inlay hints (`: String`, param names): dim text on a faint chip so they never read as code
+  hl("LspInlayHint", { fg = c.gray, bg = c.bg2, italic = true })
   -- git markers: gitsigns and lualine's diff component read these
   hl("Added", { fg = c.green })
   hl("Changed", { fg = c.blue })
