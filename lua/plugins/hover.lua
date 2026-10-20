@@ -1,7 +1,7 @@
 -- K uses Neovim's native hover instead of noice's: the native float keeps the raw markdown
 -- (`####` headings, ``` fences) with filetype=markdown, so render-markdown.nvim renders it.
 -- noice's hover strips the fences and only syntax-highlights, which leaves `####` visible.
--- Signature help stays on noice.
+-- Signature help lives in lsp-signature.lua (lsp_signature.nvim).
 return {
   {
     "folke/noice.nvim",
